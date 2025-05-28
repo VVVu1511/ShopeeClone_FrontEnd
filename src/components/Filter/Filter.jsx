@@ -63,14 +63,14 @@ function Filter(){
 
                 {seperator()}
 
-                <div>
+                <div className="space-y-5">
                     <p>Khoảng Giá</p>
-                    <div className="flex">
-                        <input placeholder="đ TỪ"></input>
-                        <span></span>
-                        <input placeholder="đ ĐẾN"></input>
+                    <div className="flex space-x-2.5">
+                        <input className="focus:outline-none pl-1 pt-1 pb-1 border-2 border-gray-300 w-1/3 text-xs" placeholder="đ TỪ"></input>
+                        <span className="mt-3 w-3 bg-gray-300 h-0.5"></span>
+                        <input className="focus:outline-none pl-1 pt-1 pb-1 border-2 border-gray-300 w-1/3 text-xs" placeholder="đ ĐẾN"></input>
                     </div>
-                    <button className="pl-12 pr-12 pt-1 pb-1 text-white text-sm bg-orange-500">ÁP DỤNG</button>
+                    <button className="w-48 pl-12 pr-12 pt-1 pb-1 text-white text-sm bg-orange-500">ÁP DỤNG</button>
                 </div>
 
                 {seperator()}
@@ -112,7 +112,7 @@ function Filter(){
                 
                 {seperator()}
 
-                <button className="pl-12 pr-12 pt-1 pb-1 text-white text-sm bg-orange-500">XÓA TẤT CẢ</button>
+                <button className="w-48 pl-12 pr-12 pt-1 pb-1 text-white text-sm bg-orange-500">XÓA TẤT CẢ</button>
             </div>
         </>
     );
