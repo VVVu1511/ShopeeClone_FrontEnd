@@ -1,78 +1,118 @@
 
-
 function Filter(){
+    const drawStars = (number_of_yellow, number_of_white) => {
+        return [Array.from({length:number_of_yellow}).map((_,i) => (
+                                <i class="fa-solid fa-star text-yellow-400"></i>
+        )) , Array.from({length:number_of_white}).map((_,i) => (
+                                <i class="fa-solid fa-star text-gray-100"></i>
+        ))]; 
+    }
+
+    const seperator = () => {
+        return <span className="bg-gray-100 h-0.5 w-48 block"></span>;
+    }
     
-    
+    const checkBox = (text) => {
+        return <>
+            <li className="flex space-x-2 cursor-pointer">
+                <input type="checkbox"></input>
+                <p>{text}</p>
+            </li>
+        </>;
+    }
+
     return(
         <>
-            <div>
-                <div>
-                    <i></i>
-                    <p></p>
+            <div className="w-1/6 pl-5 space-y-5">
+                <div className="flex pt-5">
+                    <i class="mt-2 fa-solid fa-filter"></i>
+                    <p className="ml-2 font-bold text-black text-xl">BỘ LỌC TÌM KIẾM</p>
                 </div>
 
                 <ul>
                     <p>Theo Danh Mục</p>
-                    <li></li>
+                    {checkBox("Máy điều hòa (8k+)")}
+                    {checkBox("Quạt (4k+)")}
                 </ul>
+
+                {seperator()}
 
                 <ul>
                     <p>Nơi Bán</p>
-                    <li></li>
+                    {checkBox("Hà Nội")}
+                    {checkBox("TP.Hồ Chí Minh")}
                 </ul>
 
-                <ul>
+                {seperator()}
+
+                <ul>    
                     <p>Đơn Vị Vận Chuyển</p>
-                    <li>Hỏa Tốc</li>
-                    <li>Nhanh</li>
-                    <li>Tiết Kiệm</li>
+                    {checkBox("Hỏa Tốc")}
+                    {checkBox("Nhanh")}
+                    {checkBox("Tiết Kiệm")}
                 </ul>
+
+                {seperator()}
 
                 <ul>
                     <p>Thương Hiệu</p>
-                    <li></li>
+                    {checkBox("SUNHOUSE")}
+                    {checkBox("Daikiosan")}
+                    {checkBox("BOSS")}
                 </ul>
+
+                {seperator()}
 
                 <div>
                     <p>Khoảng Giá</p>
-                    <div>
-                        <input></input>
+                    <div className="flex">
+                        <input placeholder="đ TỪ"></input>
                         <span></span>
-                        <input></input>
+                        <input placeholder="đ ĐẾN"></input>
                     </div>
-                    <button></button>
+                    <button className="pl-12 pr-12 pt-1 pb-1 text-white text-sm bg-orange-500">ÁP DỤNG</button>
                 </div>
+
+                {seperator()}
 
                 <ul>
                     <p>Loại Shop</p>
-                    <li>Shopee Mall</li>
-                    <li>Shop Yêu thích</li>
-                    <li>Xử lý đơn hàng bởi Shopee</li>
+                    {checkBox("Shopee Mall")}
+                    {checkBox("Shop Yêu thích")}
                 </ul>
 
+                {seperator()}
 
                 <ul>
                     <p>Tình Trạng</p>
-                    <li>Đã sử dụng</li>
-                    <li>Mới</li>
+                    {checkBox("Đã sử dụng")}
+                    {checkBox("Mới")}
                 </ul>
+
+                {seperator()}
 
                 <ul>
                     <p>Đánh Giá</p>
-                    <li>
-                        {/*for loop for 5 stars*/}
-                    </li>
+                    <li className="flex">{drawStars(5,0)}</li>
+                    <li className="flex">{drawStars(4,1)}</li>
+                    <li className="flex">{drawStars(3,2)}</li>
+                    <li className="flex">{drawStars(2,3)}</li>
+                    <li className="flex">{drawStars(1,4)}</li>
                 </ul>
+
+                {seperator()}
 
                 <ul>
                     <p>Dịch Vụ & Khuyến Mãi</p>
-                    <li>Đang giảm giá</li>
-                    <li>Hàng có sẵn</li>
-                    <li>Mua giá bán buôn/ bán sỉ</li>
-                    <li>Gì Cũng Rẻ</li>
+                    {checkBox("Đang giảm giá")}
+                    {checkBox("Hàng có sẵn")}
+                    {checkBox("Mua giá bán buôn/ bán sỉ")}
+                    {checkBox("Gì Cũng Rẻ")}
                 </ul>
+                
+                {seperator()}
 
-                <button className="pl-5 pr-5 pt-1 pb-1 text-white text-xl bg-orange-400">XÓA TẤT CẢ</button>
+                <button className="pl-12 pr-12 pt-1 pb-1 text-white text-sm bg-orange-500">XÓA TẤT CẢ</button>
             </div>
         </>
     );
