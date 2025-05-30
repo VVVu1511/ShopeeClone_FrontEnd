@@ -1,9 +1,17 @@
 
+
 function Footer(){
     function separator(){
-        return <p className="opacity-50">|</p>
+        return <p className="opacity-20">|</p>
     }
     
+    function logo(img,w=10,h=11){
+        const width = `w-${w}`;
+        const height = `w-${h}`;
+
+        return <img src = {img} className={`${width} ${height}`}></img>
+    }
+
     function brand(){
         return "mt-3 flex space-x-2";
     }
@@ -12,10 +20,10 @@ function Footer(){
         <>
             <hr className="h-1.5 bg-orange-600"></hr>
             
-            <div className="flex pt-10">
-                <div className="pl-5">
+            <div className="flex pt-10 text-sm">
+                <div className="pl-10 space-y-2 mb-10">
                     <p className="font-bold">DỊCH VỤ KHÁCH HÀNG</p>
-                    <p className="mt-3">Trung Tâm Trợ Giúp Shopee</p>
+                    <p className="">Trung Tâm Trợ Giúp Shopee</p>
                     <p>Shopee Blog</p>
                     <p>Shopee Mall</p>
                     <p>Hướng Dẫn Mua Hàng/Đặt Hàng</p>
@@ -28,7 +36,7 @@ function Footer(){
                     <p>Chính Sách Bảo Hành</p>
                 </div>
 
-                <div className="ml-16">
+                <div className="ml-16 space-y-2">
                     <p className="font-bold">SHOPEE VIỆT NAM</p>
                     <p>Về Shopee</p>
                     <p>Tuyển Dụng</p>
@@ -43,8 +51,38 @@ function Footer(){
 
                 <div className="ml-32">
                     <p className="font-bold">THANH TOÁN</p>
+                    <div className="mt-5 flex space-x-2">
+                        {[...Array(3)].map((_,i) => (
+                                logo("./images/visa.jpeg")   
+                            ))}
+                    </div>
+                    <div className="flex space-x-2">
+                        {[...Array(3)].map((_,i) => (
+                                logo("./images/visa.jpeg")   
+                            ))}
+                    </div>
+                    <div className="flex space-x-2">
+                        {[...Array(2)].map((_,i) => (
+                                logo("./images/visa.jpeg")   
+                            ))}
+                    </div>
 
-                    <p className="font-bold">ĐƠN VỊ VẬN CHUYỂN</p>
+                    <p className="mt-5 font-bold">ĐƠN VỊ VẬN CHUYỂN</p>
+                    <div className="mt-5 flex space-x-2">
+                        {[...Array(3)].map((_,i) => (
+                                logo("./images/visa.jpeg")   
+                            ))}
+                    </div>
+                    <div className="flex space-x-2">
+                        {[...Array(3)].map((_,i) => (
+                                logo("./images/visa.jpeg")   
+                            ))}
+                    </div>
+                    <div className="flex space-x-2">
+                        {[...Array(3)].map((_,i) => (
+                                logo("./images/visa.jpeg")   
+                            ))}
+                    </div>
                 </div>
 
                 <div className="ml-48">
@@ -70,22 +108,29 @@ function Footer(){
 
                 <div className="ml-32">
                     <p className="font-bold">TẢI ỨNG DỤNG SHOPEE</p>
-
+                    <div className="flex space-x-2">
+                        {logo("./images/visa.jpeg",24,24)}
+                        <div className="mt-6">
+                            {[...Array(3)].map((_,i) => (
+                                logo("./images/visa.jpeg",28,7)   
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <hr className=""></hr>
 
-            <div className="mt-10 pl-5 flex space-x-10">
+            <div className="mt-10 pl-10 flex space-x-10">
                 <div className="flex space-x-2">
                     <p>© 2025 Shopee.</p>
                     <p>Tất cả các quyền được bảo lưu.</p>
                 </div>
 
-                <div className="flex space-x-2">
+                <div className="flex space-x-1">
                     <p>Quốc gia & Khu vực:</p>
                     <p>Singapore</p>
-                    <p className="opacity-50">|</p>
+                    {separator()}
                     <p>Indonesia</p>
                     {separator()}
                     <p>Thái Lan</p>
@@ -108,13 +153,13 @@ function Footer(){
                 </div>
             </div>
 
-            <div className="mt-10 bg-gray-100 text-center">
+            <div className="text-sm pt-10 pb-10 pl-10 pr-10 mt-10 bg-gray-100 text-center">
                 <div className="space-x-5 flex justify-center">
-                    <p>Chính sách bảo mật</p>
+                    <p className="uppercase">Chính sách bảo mật</p>
                     {separator()}
-                    <p>Quy chế hoạt động</p>
+                    <p className="uppercase">Quy chế hoạt động</p>
                     {separator()}
-                    <p>Chính sách vận chuyển</p>
+                    <p className="uppercase">Chính sách vận chuyển</p>
                     {separator()}
                     <p>CHÍNH SÁCH TRẢ HÀNG VÀ HOÀN TIỀN</p>
                 </div>
