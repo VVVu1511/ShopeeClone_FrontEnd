@@ -15,7 +15,7 @@ function Filter(){
     const checkBox = (text) => {
         return <>
             <li className="flex space-x-2 cursor-pointer">
-                <input type="checkbox"></input>
+                <input className="cursor-pointer" type="checkbox"></input>
                 <p>{text}</p>
             </li>
         </>;
