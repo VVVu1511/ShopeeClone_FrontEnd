@@ -14,7 +14,20 @@ const AppRoutes = () => {
 
         <Route path="/home" element={<Filter />} />
 
-        <Route path = "/test" element={<Footer />} />
+        <Route path = "/test" element={
+          
+          <>
+            <NavBar />
+            
+            <div className="w-screen flex mb-5">
+              <Filter />
+              <ProductGrid />
+            </div>
+
+            <Footer />
+          </>
+
+          } />
       </Routes>
     </Router>
   );

@@ -3,7 +3,7 @@
 function ProductCard(){
     return (
         <>
-            <div class="duration-100 hover:scale-105 w-64 border-2 border-gray-200 hover:border-red-400 cursor-pointer">
+            <div class="duration-100 w-64 border-2 border-gray-200 hover:border-red-400 cursor-pointer">
             
             <img src="https://c1.staticflickr.com/7/6088/6082469805_d0ee5c523a_o.jpg"
                 class="h-64"></img>
