@@ -1,5 +1,7 @@
 import style from './NavBar.module.css'
 import { Separator } from '../Footer/Footer'
+import { useState } from 'react';
+
 
 function smallText(text){
     return <p className="mr-1 hover:opacity-80 cursor-pointer">
@@ -7,10 +9,63 @@ function smallText(text){
     </p>;
 }
 
+function QR(showQR){
+    return <>
+        <div className={`${style.QR} absolute p-3 top-8 left-1/2 bg-gray-100 ${showQR ? 'inline-block' : 'hidden'}`}>
+            <img src="./images/visa.jpeg" className='h-32 w-32'></img>
+
+            <div className='mt-2 grid grid-cols-2'>
+                <img className='w-16 h-5' src="./images/visa.jpeg"></img>
+                <img className='w-16 h-5' src="./images/visa.jpeg"></img>
+                <img className='w-16 h-5' src="./images/visa.jpeg"></img>
+            </div>
+        </div>
+    </>
+}
+
+function Notification(){
+    return <>
+        <div className={`${style.notification} h-64 absolute clip-notch`}>
+            <div className={`${style.notification_first_block} bg-white`}>
+
+            </div>
+
+            <div className='cursor-pointer flex bg-gray-100'>
+                <div className='p-2 text-center pl-16 pr-16 pt-2 pb-2'>Đăng ký</div>
+                <div className='p-2 text-center pl-16 pr-16 pt-2 pb-2'>Đăng nhập</div>
+            </div>
+        </div>
+    </>
+}
+
+function Language(){
+    const typical_class = 'text-center pl-2 pt-2 pb-2 pr-16';
+
+    return <>
+        <div className={`${style.language} absolute bg-white`}>
+            <div className={typical_class}>Tiếng Việt</div>
+            <div className={typical_class}>English</div>
+        </div>
+    </>
+}
+
+
 function NavBar(){
+    const [showQR, setShowQR] = useState(false);
+
     return (
         <>
-        <div className="flex justify-center bg-orange-500">
+        <div className="relative flex justify-center bg-orange-500">
+            <div className= {`${showQR ? 'block' : 'hidden'} ${style.sharp_point} absolute border-x-8 border-t-8 border-x-transparent border-t-white transform -translate-x-1/2 top-5 rotate-180`}></div>
+
+            <div className= {`${showQR ? 'block' : 'hidden'} ${style.sharp_point2} absolute border-x-8 border-t-8 border-x-transparent border-t-white transform -translate-x-1/2 top-5 rotate-180`}></div>
+
+            {QR(showQR)}
+
+            {Notification()}
+
+            {Language()}
+
             <div className="w-[55%]">
                 <div className="flex justify-between text-white">
                     <div className="flex pt-1 pl-7 text-xs space-x-1.5">
@@ -18,8 +73,11 @@ function NavBar(){
                         <Separator />
                         {smallText("Trở thành Người bán Shopee")}
                         <Separator />
-                        {smallText("Tải ứng dụng")}
-                        <Separator />
+                        <div onMouseEnter={() => setShowQR(true)}
+                            onMouseLeave={() => setShowQR(false)}>
+                            {smallText("Tải ứng dụng")}
+                        </div>
+                        <Separator />   
                         {smallText("Kết nối")}
                         <i class="cursor-pointer mt-1 fa-brands fa-facebook"></i>
                         <i class="cursor-pointer mt-1 fa-brands fa-instagram"></i>
@@ -41,7 +99,6 @@ function NavBar(){
 
                         {smallText("Đăng nhập")}
                     </div>
-
                 </div>
 
                 <div class="flex pl-5 pb-5 pt-2">
