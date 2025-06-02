@@ -1,9 +1,9 @@
 
+export function Separator(){
+    return <p className="opacity-50">|</p>
+}
 
-function Footer(){
-    function separator(){
-        return <p className="opacity-20">|</p>
-    }
+export default function Footer(){
     
     function logo(img,w="w-10",h="h-11"){
         return <img src = {img} className={`${w} ${h}`}></img>
@@ -130,25 +130,25 @@ function Footer(){
                     <div className="flex space-x-1">
                         <p>Quốc gia & Khu vực:</p>
                         <p>Singapore</p>
-                        {separator()}
+                        {Separator()}
                         <p>Indonesia</p>
-                        {separator()}
+                        {Separator()}
                         <p>Thái Lan</p>
-                        {separator()}
+                        {Separator()}
                         <p>Malaysia</p>
-                        {separator()}
+                        {Separator()}
                         <p>Việt Nam</p>
-                        {separator()}
+                        {Separator()}
                         <p>Philippines</p>
-                        {separator()}
+                        {Separator()}
                         <p>Brazil</p>
-                        {separator()}
+                        {Separator()}
                         <p>México</p>
-                        {separator()}
+                        {Separator()}
                         <p>Colombia</p>
-                        {separator()}
+                        {Separator()}
                         <p>Chile</p>
-                        {separator()}
+                        {Separator()}
                         <p>Đài Loan</p>
                     </div>
                 </div>
@@ -158,11 +158,11 @@ function Footer(){
             <div className="text-sm pt-10 pb-9 pl-10 pr-10 mt-10 bg-gray-100 text-center">
                 <div className="space-x-5 flex justify-center">
                     <p className="uppercase">Chính sách bảo mật</p>
-                    {separator()}
+                    {Separator()}
                     <p className="uppercase">Quy chế hoạt động</p>
-                    {separator()}
+                    {Separator()}
                     <p className="uppercase">Chính sách vận chuyển</p>
-                    {separator()}
+                    {Separator()}
                     <p>CHÍNH SÁCH TRẢ HÀNG VÀ HOÀN TIỀN</p>
                 </div>
 
@@ -180,4 +180,3 @@ function Footer(){
     );
 }
 
-export default Footer;

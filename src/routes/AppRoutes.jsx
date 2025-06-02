@@ -3,7 +3,7 @@ import ProductCard from "../components/ProductCard/ProductCard";
 import NavBar from "../components/NavBar/NavBar";
 import Filter from "../components/Filter/Filter";
 import ProductGrid from "../components/ProductGrid/ProductGrid";
-import Footer from "../Footer/Footer";
+import Footer from "../components/Footer/Footer";
 
 
 const AppRoutes = () => {
@@ -19,14 +19,14 @@ const AppRoutes = () => {
           <>
             <NavBar />
             
-            <div className="w-screen flex mb-5">
+            <div className="flex justify-center mb-5">
               <Filter />
               <ProductGrid />
             </div>
 
             <Footer />
           </>
-
+          
           } />
       </Routes>
     </Router>

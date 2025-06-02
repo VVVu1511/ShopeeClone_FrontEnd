@@ -7,7 +7,7 @@ function FilterBlock(){
 function ProductGrid(){
     return (
         <>
-            <div className="w-[80%] pt-5">
+            <div className="w-[44%] pt-5">
                 <div className="flex space-x-2 mb-5">
                     <i className="mt-1.5 fa-solid fa-lightbulb"></i>
                     <p>Kết quả tìm kiếm cho từ khoá </p>
@@ -39,11 +39,11 @@ function ProductGrid(){
                             
                             <div className="flex">
                                 
-                                <div className="bg-gray-100 opacity-50 flex place-items-center p-3">
+                                <div className="border-2 border-gray-300 bg-white opacity-50 flex place-items-center p-3">
                                     <i className="fa-solid fa-arrow-left"></i>
                                 </div>
 
-                                <div className="bg-white flex place-items-center p-3">
+                                <div className="border-2 border-gray-300 cursor-pointer bg-gray-100 hover:bg-white flex place-items-center p-3">
                                     <i className="fa-solid fa-arrow-right"></i>
                                 </div>
 
