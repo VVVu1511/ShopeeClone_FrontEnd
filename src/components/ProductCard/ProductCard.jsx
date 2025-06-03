@@ -1,6 +1,8 @@
 import React from 'react';
 
 function ProductCard({product}){
+    if(!product) return null;
+    
     return (
         <>
             <div className="duration-100 border-2 border-gray-200 hover:border-red-400 cursor-pointer">

@@ -102,16 +102,11 @@ function ProductGrid(){
                         <div>Loading products..</div>
                     ) : (
                         <div className="grid grid-cols-5 mt-1 justify-center flex">
-                            <ProductCard product={products[0]}></ProductCard>
-                            <ProductCard></ProductCard>
-                            <ProductCard></ProductCard>
-                            <ProductCard></ProductCard>
-                            <ProductCard></ProductCard>
-                            <ProductCard></ProductCard>
-                            <ProductCard></ProductCard>
-                            <ProductCard></ProductCard>
-                            <ProductCard></ProductCard>
-                            <ProductCard></ProductCard>
+                            {
+                                products.map((product,index)=>{
+                                    return <ProductCard key={index} product={product}></ProductCard>
+                                })
+                            }
                         </div>
                     )
                 }
