@@ -4,7 +4,7 @@ import NavBar from "../components/NavBar/NavBar";
 import Filter from "../components/Filter/Filter";
 import ProductGrid from "../components/ProductGrid/ProductGrid";
 import Footer from "../components/Footer/Footer";
-
+import React from 'react';
 
 const AppRoutes = () => {
   return (

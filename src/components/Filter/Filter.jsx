@@ -1,3 +1,4 @@
+import React from 'react';
 
 function Filter(){
     const drawStars = (number_of_yellow, number_of_white) => {
@@ -25,7 +26,7 @@ function Filter(){
         <>
             <div className="w-[10%] w-1/6 pl-5 space-y-5">
                 <div className="flex pt-5">
-                    <i class="mt-2 fa-solid fa-filter"></i>
+                    <i className="mt-2 fa-solid fa-filter"></i>
                     <p className="ml-2 font-bold text-black text-xl">BỘ LỌC TÌM KIẾM</p>
                 </div>
 

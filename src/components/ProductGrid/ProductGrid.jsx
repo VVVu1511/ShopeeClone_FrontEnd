@@ -1,10 +1,55 @@
+import { useState } from "react";
 import ProductCard from "../ProductCard/ProductCard";
+import React from 'react';
+import { useEffect } from "react";
 
 function FilterBlock(){
     return "flex justify-center items-center h-12 bg-white pl-3 pr-3 cursor-pointer";
 }
 
 function ProductGrid(){
+    async function getAdminToken(){
+        const response = await fetch('http://localhost:8080/shop/auth/token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify( {
+                "username": "admin",
+                "password": "admin"
+            })
+        });
+        
+        const data = await response.json();
+
+        return data.result.token;
+    }
+
+    async function getProducts(admin_token) {
+        const products = await fetch("http://localhost:8080/shop/product",{
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${admin_token}`,
+            }
+        });
+    
+        const data = await products.json();
+
+        return data;
+    }
+
+    const [products, setProducts] = useState(null);
+
+    useEffect(() => {
+        async function fetchData() {
+            const admin_token = await getAdminToken();
+            const productsData = await getProducts(admin_token);
+            setProducts(productsData.result); 
+        }
+
+        fetchData();
+    }, []);
+    
     return (
         <>
             <div className="w-[44%] pt-5">
@@ -52,18 +97,25 @@ function ProductGrid(){
                     </ul>
                 </div>
 
-                <div className="grid grid-cols-5 mt-1 justify-center flex">
-                    <ProductCard></ProductCard>
-                    <ProductCard></ProductCard>
-                    <ProductCard></ProductCard>
-                    <ProductCard></ProductCard>
-                    <ProductCard></ProductCard>
-                    <ProductCard></ProductCard>
-                    <ProductCard></ProductCard>
-                    <ProductCard></ProductCard>
-                    <ProductCard></ProductCard>
-                    <ProductCard></ProductCard>
-                </div>
+                {
+                    !products ? (
+                        <div>Loading products..</div>
+                    ) : (
+                        <div className="grid grid-cols-5 mt-1 justify-center flex">
+                            <ProductCard product={products[0]}></ProductCard>
+                            <ProductCard></ProductCard>
+                            <ProductCard></ProductCard>
+                            <ProductCard></ProductCard>
+                            <ProductCard></ProductCard>
+                            <ProductCard></ProductCard>
+                            <ProductCard></ProductCard>
+                            <ProductCard></ProductCard>
+                            <ProductCard></ProductCard>
+                            <ProductCard></ProductCard>
+                        </div>
+                    )
+                }
+
 
 
             </div>

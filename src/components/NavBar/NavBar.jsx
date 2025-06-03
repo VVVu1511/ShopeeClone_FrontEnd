@@ -1,7 +1,7 @@
 import style from './NavBar.module.css'
 import { Separator } from '../Footer/Footer'
 import { useState } from 'react';
-
+import React from 'react';
 
 function smallText(text){
     return <p className="mr-1 hover:opacity-80 cursor-pointer">
@@ -23,9 +23,9 @@ function QR(showQR){
     </>
 }
 
-function Notification(){
+function Notification(showNotification){
     return <>
-        <div className={`${style.notification} h-64 absolute clip-notch`}>
+        <div className={`${showNotification ? 'block' : 'hidden'} ${style.notification} h-64 absolute clip-notch`}>
             <div className={`${style.notification_first_block} bg-white`}>
 
             </div>
@@ -38,11 +38,11 @@ function Notification(){
     </>
 }
 
-function Language(){
+function Language(showLanguage){
     const typical_class = 'text-center pl-2 pt-2 pb-2 pr-16';
 
     return <>
-        <div className={`${style.language} absolute bg-white`}>
+        <div className={`${showLanguage ? 'block' : 'hidden'}  ${style.language} absolute bg-white`}>
             <div className={typical_class}>Tiếng Việt</div>
             <div className={typical_class}>English</div>
         </div>
@@ -52,19 +52,21 @@ function Language(){
 
 function NavBar(){
     const [showQR, setShowQR] = useState(false);
+    const [showLanguage, setShowLanguage] = useState(false);
+    const [showNotification, setShowNotification] = useState(false);
 
     return (
         <>
         <div className="relative flex justify-center bg-orange-500">
-            <div className= {`${showQR ? 'block' : 'hidden'} ${style.sharp_point} absolute border-x-8 border-t-8 border-x-transparent border-t-white transform -translate-x-1/2 top-5 rotate-180`}></div>
+            <div className= {`${showNotification ? 'block' : 'hidden'} ${style.sharp_point} absolute border-x-8 border-t-8 border-x-transparent border-t-white transform -translate-x-1/2 top-5 rotate-180`}></div>
 
-            <div className= {`${showQR ? 'block' : 'hidden'} ${style.sharp_point2} absolute border-x-8 border-t-8 border-x-transparent border-t-white transform -translate-x-1/2 top-5 rotate-180`}></div>
+            <div className= {`${showLanguage ? 'block' : 'hidden'} ${style.sharp_point2} absolute border-x-8 border-t-8 border-x-transparent border-t-white transform -translate-x-1/2 top-5 rotate-180`}></div>
 
             {QR(showQR)}
 
-            {Notification()}
+            {Notification(showNotification)}
 
-            {Language()}
+            {Language(showLanguage)}
 
             <div className="w-[55%]">
                 <div className="flex justify-between text-white">
@@ -79,20 +81,26 @@ function NavBar(){
                         </div>
                         <Separator />   
                         {smallText("Kết nối")}
-                        <i class="cursor-pointer mt-1 fa-brands fa-facebook"></i>
-                        <i class="cursor-pointer mt-1 fa-brands fa-instagram"></i>
+                        <i className="cursor-pointer mt-1 fa-brands fa-facebook"></i>
+                        <i className="cursor-pointer mt-1 fa-brands fa-instagram"></i>
                     </div>
 
                     <div className="flex pt-1 pr-7 text-xs space-x-1.5">
-                        <i class="cursor-pointer mt-1 fa-solid fa-bell"></i>
-                        <p className="hover:opacity-80 cursor-pointer">Thông báo</p>
+                        <i className="cursor-pointer mt-1 fa-solid fa-bell"></i>
+                        <p className="hover:opacity-80 cursor-pointer"
+                            onMouseEnter={() => setShowNotification(true)}
+                            onMouseLeave = {() => setShowNotification(false)}
+                        >Thông báo</p>
 
-                        <i class="cursor-pointer mt-1 fa-solid fa-circle-question"></i>
+                        <i className="cursor-pointer mt-1 fa-solid fa-circle-question"></i>
                         <p className="hover:opacity-80 cursor-pointer">Hỗ Trợ</p>
 
-                        <i class="cursor-pointer mt-1 fa-solid fa-globe"></i>
+                        <i className="cursor-pointer mt-1 fa-solid fa-globe"></i>
                         
-                        {smallText("Tiếng Việt")}
+                        <div onMouseEnter={() => setShowLanguage(true)}
+                            onMouseLeave = {() => setShowLanguage(false)}>
+                            {smallText("Tiếng Việt")}
+                        </div>
 
                         {smallText("Đăng ký")}
                         <Separator />
@@ -127,7 +135,7 @@ function NavBar(){
                     </div>
 
                     <div className="w-1/6 pl-16">
-                        <i class="mt-7 text-white text-2xl fa-solid fa-cart-shopping"></i>
+                        <i className="mt-7 text-white text-2xl fa-solid fa-cart-shopping"></i>
                     </div>
                 </div>
 

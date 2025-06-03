@@ -1,3 +1,4 @@
+import React from 'react';
 
 export function Separator(){
     return <p className="opacity-50">|</p>
