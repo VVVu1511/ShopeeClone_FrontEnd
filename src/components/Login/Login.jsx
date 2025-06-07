@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Login(){
     const [isButtonActive,setIsButtonActive] = useState(false);
-    const [isAccountValid, setIsAccountValid] = useState(false);
+    const [isAccountValid, setIsAccountValid] = useState(true);
     const [password,setPassword] = useState('');
     const userName = useRef(null);
     const [eyeOpen, setEyeOpen] = useState(false);
@@ -25,17 +25,19 @@ function Login(){
 
     async function handleLoginButton(){
         const response = await fetch("http://localhost:8080/shop/auth/token",{
-            "method": 'POST',
-            "content-type": 'application/json',
+            method: 'POST',
+            headers: {
+                "Content-Type": 'application/json'
+            },
             "body": JSON.stringify({
                 username: userName.current.value,
                 password: password
             })
         });
 
-        const data = await response.data();
+        const data = await response.json();
 
-        if(data.authenticated == true){
+        if(data.code === 0){
             setIsAccountValid(true);
             navigate("/home");
         }
@@ -57,6 +59,10 @@ function Login(){
         }
     }
 
+    function handleRegisterClick(){
+        navigate("/register");
+    }
+
     return (
         <>  
             <div className='bg-white pl-16 pr-16 pt-8 pb-8 place-content-between flex'>
@@ -69,10 +75,12 @@ function Login(){
             </div>
 
             <div className='flex justify-end pr-32 bg-orange-500 pt-16 pb-16'>
-                <div className= {`inline-block rounded-lg space-y-5 p-5 bg-white ${style.login}`}>
+                <div className= {`inline-block rounded-lg space-y-5 p-5 bg-white 
+                    ${style.login}`}>
                     <div className='flex space-x-3'>
                         <p className='m-3 text-black text-xl'>Đăng nhập</p>
-                        <div className='p-3 bg-white text-yellow-200 border-2 border-yellow-200'>Đăng nhập với mã QR</div>
+                        <div className='p-3 bg-white text-yellow-200 border-2 
+                        border-yellow-200'>Đăng nhập với mã QR</div>
                         <i className="fa-solid fa-qrcode mt-5 text-orange-500"></i>
                     </div>
 
@@ -84,18 +92,27 @@ function Login(){
                         </div>
                     </div>
 
-                    <input ref={userName} onChange={handleLoginInput} id="userName" className='p-3 w-full border-2 border-gray-200 rounded-sm' placeholder="Email/Số điện thoại/Tên đăng nhập"></input>
+                    <input ref={userName} onChange={handleLoginInput} id="userName" 
+                        className='p-3 w-full border-2 border-gray-200 rounded-sm'
+                        placeholder="Email/Số điện thoại/Tên đăng nhập"></input>
                                         
                     <div className='relative'>
-                        <input type='password' onChange={(e) => {handleLoginInput(); handlePasswordInput(e);}} id="password" className='w-full p-3 border-2 border-gray-200 rounded-sm' placeholder="Mật khẩu"></input>
+                        <input type='password' onChange={(e) => {
+                            handleLoginInput(); 
+                            handlePasswordInput(e);
+                        }} id="password" className='w-full p-3 border-2 border-gray-200 rounded-sm' placeholder="Mật khẩu"></input>
                         <i
                             onClick={handleEyeClick}
-                            className={`right-3.5 top-3.5 absolute ${eyeOpen ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}`}
+                            className={`right-3.5 top-3.5 absolute ${
+                            eyeOpen ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}`}
                         />
 
                     </div>
 
-                    <button className={`${isButtonActive ? "bg-orange-500 cursor-pointer hover:opacity-80" : "bg-orange-300 cursor-not-allowed"} pb-2 pt-2 w-full flex justify-center text-white`}>Đăng nhập</button>
+                    <button onClick={handleLoginButton} 
+                        className={`${isButtonActive 
+                        ? "bg-orange-500 cursor-pointer hover:opacity-80" : "bg-orange-300 cursor-not-allowed"} 
+                        pb-2 pt-2 w-full flex justify-center text-white`}>Đăng nhập</button>
 
                     <div className='flex place-content-between'>
                         <p className='text-blue-400 text-sm'>Quên mật khẩu</p>
@@ -109,11 +126,13 @@ function Login(){
                     </div>
 
                     <div className='flex place-content-between'>
-                        <div className='space-x-2 pt-2 pb-2 w-[48%] justify-center flex border-2 border-yellow-100'>
+                        <div className='space-x-2 pt-2 pb-2 w-[48%] justify-center 
+                            flex border-2 border-yellow-100'>
                             <i class="text-blue-500 mt-1.5 fa-brands fa-facebook"></i>
                             <p>Facebook</p>
                         </div>
-                        <div className='space-x-2 pt-2 pb-2 w-[48%] justify-center flex border-2 border-yellow-100'>
+                        <div className='space-x-2 pt-2 pb-2 w-[48%] justify-center flex border-2 
+                        border-yellow-100'>
                             <i className="mt-1.5 fa-brands fa-google"></i>
                             <p>Google</p>
                         </div>
@@ -121,7 +140,7 @@ function Login(){
 
                     <div className='flex space-x-2 justify-center'>
                         <p className=''>Bạn mới biết đến Shopee?</p>
-                        <p className=' text-orange-500'>Đăng ký</p>
+                        <p onClick={handleRegisterClick} className=' text-orange-500'>Đăng ký</p>
                     </div>
                 </div>
             </div>

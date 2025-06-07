@@ -6,31 +6,39 @@ import ProductGrid from "../components/ProductGrid/ProductGrid";
 import Footer from "../components/Footer/Footer";
 import React from 'react';
 import Login from "../components/Login/Login"
+import Register from "../components/Register/Register";
 
 const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Filter />} />
-
-        <Route path="/home" element={<Login />} />
-
-        <Route path = "/test" element={
-          
+        <Route path="/home" element={
           <>
-            {/* <NavBar />
-            
+            <NavBar />
             <div className="flex justify-center mb-5">
               <Filter />
               <ProductGrid />
             </div>
 
-            <Footer /> */}
+            <Footer />
+          </>
+          
+        } />
 
+        <Route path = "/login" element={
+          <>
             <Login></Login>
+            <Footer></Footer>
           </>
           
           } />
+
+          <Route path = "/register" element={
+            <>
+              <Register></Register>
+            </>
+          } />
+
       </Routes>
     </Router>
   );
