@@ -28,7 +28,6 @@ const AppRoutes = () => {
             <Footer /> */}
 
             <Login></Login>
-            <Footer></Footer>
           </>
           
           } />
