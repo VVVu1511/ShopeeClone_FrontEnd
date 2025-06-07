@@ -5,6 +5,7 @@ import Filter from "../components/Filter/Filter";
 import ProductGrid from "../components/ProductGrid/ProductGrid";
 import Footer from "../components/Footer/Footer";
 import React from 'react';
+import Login from "../components/Login/Login"
 
 const AppRoutes = () => {
   return (
@@ -12,19 +13,22 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/login" element={<Filter />} />
 
-        <Route path="/home" element={<Filter />} />
+        <Route path="/home" element={<Login />} />
 
         <Route path = "/test" element={
           
           <>
-            <NavBar />
+            {/* <NavBar />
             
             <div className="flex justify-center mb-5">
               <Filter />
               <ProductGrid />
             </div>
 
-            <Footer />
+            <Footer /> */}
+
+            <Login></Login>
+            <Footer></Footer>
           </>
           
           } />
