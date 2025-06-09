@@ -1,16 +1,18 @@
 import React from 'react';
 import { useRef , useState} from 'react';
+import { useInRouterContext, useNavigate } from 'react-router-dom';
 
 function Register(){
     const [phoneNumber,setPhoneNumber] = useState("");
-    
+    const navigate = useNavigate();
+
     function inputPhoneNumber(e){
         setPhoneNumber(e.target.value);
     }
 
     return (
         <>
-            <div className= {` inline-block rounded-lg space-y-5 p-5 bg-white`}>
+            <div className= {`inline-block rounded-lg space-y-5 p-5 bg-white`}>
                 <p className="text-xl text-black">Đăng ký</p>
 
                 <input id="phone_number" onChange={(e) => inputPhoneNumber(e)}
@@ -51,7 +53,10 @@ function Register(){
 
                 <div className='flex space-x-2 justify-center'>
                         <p>Bạn đã có tài khoản?</p>
-                        <p className=' text-orange-500'>Đăng nhập</p>
+                        <p onClick={(e) => {
+                            e.preventDefault();
+                            navigate("/login");
+                        }} className='cursor-pointer text-orange-500'>Đăng nhập</p>
                 </div>
             </div>
         </>

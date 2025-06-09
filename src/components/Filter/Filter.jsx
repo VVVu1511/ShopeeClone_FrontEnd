@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function Filter(){
     const drawStars = (number_of_yellow, number_of_white) => {
@@ -13,14 +13,43 @@ function Filter(){
         return <span className="bg-gray-100 h-0.5 w-48 block"></span>;
     }
     
-    const checkBox = (text) => {
+    const checkBox = (text, callback) => {
         return <>
             <li className="flex space-x-2 cursor-pointer">
-                <input className="cursor-pointer" type="checkbox"></input>
+                <input onClick={() => callback(text)} className="cursor-pointer" type="checkbox"></input>
                 <p>{text}</p>
             </li>
         </>;
     }
+
+    const response = fetch("",{
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Bearer-Token': ''
+        },
+        body: {
+            productType: productType,
+            sellLocation: sellLocation,
+            transportType: transportType,
+            brand: brand,
+            price: price,
+            shopType: shopType,
+            status: status,
+            sale: sale
+        }
+    });
+
+    const data = response.json();
+
+    const [productType,setProductType] = useState("");
+    const [sellLocation,setSellLocation] = useState("");
+    const [transportType,setTransportType] = useState("");
+    const [brand,setBrand] = useState("");
+    const [price,setPrice] = useState("");
+    const [shopType,setShopType] = useState("");
+    const [status,setStatus] = useState("");
+    const [sale,setSale] = useState("");
 
     return(
         <>
@@ -32,34 +61,34 @@ function Filter(){
 
                 <ul>
                     <p>Theo Danh Mục</p>
-                    {checkBox("Máy điều hòa (8k+)")}
-                    {checkBox("Quạt (4k+)")}
+                    {checkBox("Máy điều hòa (8k+)",setProductType)}
+                    {checkBox("Quạt (4k+)",setProductType)}
                 </ul>
 
                 {seperator()}
 
                 <ul>
                     <p>Nơi Bán</p>
-                    {checkBox("Hà Nội")}
-                    {checkBox("TP.Hồ Chí Minh")}
+                    {checkBox("Hà Nội",setSellLocation)}
+                    {checkBox("TP.Hồ Chí Minh",setSellLocation)}
                 </ul>
 
                 {seperator()}
 
                 <ul>    
                     <p>Đơn Vị Vận Chuyển</p>
-                    {checkBox("Hỏa Tốc")}
-                    {checkBox("Nhanh")}
-                    {checkBox("Tiết Kiệm")}
+                    {checkBox("Hỏa Tốc",setTransportType)}
+                    {checkBox("Nhanh",setTransportType)}
+                    {checkBox("Tiết Kiệm",setTransportType)}
                 </ul>
 
                 {seperator()}
 
                 <ul>
                     <p>Thương Hiệu</p>
-                    {checkBox("SUNHOUSE")}
-                    {checkBox("Daikiosan")}
-                    {checkBox("BOSS")}
+                    {checkBox("SUNHOUSE",setBrand)}
+                    {checkBox("Daikiosan",setBrand)}
+                    {checkBox("BOSS",setBrand)}
                 </ul>
 
                 {seperator()}
@@ -78,16 +107,16 @@ function Filter(){
 
                 <ul>
                     <p>Loại Shop</p>
-                    {checkBox("Shopee Mall")}
-                    {checkBox("Shop Yêu thích")}
+                    {checkBox("Shopee Mall",setShopType)}
+                    {checkBox("Shop Yêu thích",setShopType)}
                 </ul>
 
                 {seperator()}
 
                 <ul>
                     <p>Tình Trạng</p>
-                    {checkBox("Đã sử dụng")}
-                    {checkBox("Mới")}
+                    {checkBox("Đã sử dụng",setStatus)}
+                    {checkBox("Mới",setStatus)}
                 </ul>
 
                 {seperator()}
@@ -105,10 +134,10 @@ function Filter(){
 
                 <ul>
                     <p>Dịch Vụ & Khuyến Mãi</p>
-                    {checkBox("Đang giảm giá")}
-                    {checkBox("Hàng có sẵn")}
-                    {checkBox("Mua giá bán buôn/ bán sỉ")}
-                    {checkBox("Gì Cũng Rẻ")}
+                    {checkBox("Đang giảm giá",setSale)}
+                    {checkBox("Hàng có sẵn",setSale)}
+                    {checkBox("Mua giá bán buôn/ bán sỉ",setSale)}
+                    {checkBox("Gì Cũng Rẻ",setSale)}
                 </ul>
                 
                 {seperator()}

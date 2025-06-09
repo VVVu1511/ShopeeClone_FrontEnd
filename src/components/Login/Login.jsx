@@ -65,16 +65,6 @@ function Login(){
 
     return (
         <>  
-            <div className='bg-white pl-16 pr-16 pt-8 pb-8 place-content-between flex'>
-                <div className='flex space-x-3'>
-                    <img className='box-border w-24 h-6'  src='./images/logo.png'></img>
-                    <p className=' text-black text-xl'>Đăng nhập</p>
-                </div>
-                
-                <p className='text-red-300 text-xl'>Bạn cần giúp đỡ?</p>
-            </div>
-
-            <div className='flex justify-end pr-32 bg-orange-500 pt-16 pb-16'>
                 <div className= {`inline-block rounded-lg space-y-5 p-5 bg-white 
                     ${style.login}`}>
                     <div className='flex space-x-3'>
@@ -140,10 +130,9 @@ function Login(){
 
                     <div className='flex space-x-2 justify-center'>
                         <p className=''>Bạn mới biết đến Shopee?</p>
-                        <p onClick={handleRegisterClick} className=' text-orange-500'>Đăng ký</p>
+                        <p onClick={handleRegisterClick} className='cursor-pointer text-orange-500'>Đăng ký</p>
                     </div>
                 </div>
-            </div>
         </>
     );
 }

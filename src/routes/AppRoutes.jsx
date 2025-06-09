@@ -7,6 +7,7 @@ import Footer from "../components/Footer/Footer";
 import React from 'react';
 import Login from "../components/Login/Login"
 import Register from "../components/Register/Register";
+import LoginRegisterFrame from "../components/LoginRegisterFrame/LoginRegisterFrame";
 
 const AppRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const AppRoutes = () => {
         <Route path="/home" element={
           <>
             <NavBar />
+            
             <div className="flex justify-center mb-5">
               <Filter />
               <ProductGrid />
@@ -27,17 +29,19 @@ const AppRoutes = () => {
 
         <Route path = "/login" element={
           <>
-            <Login></Login>
-            <Footer></Footer>
+            <LoginRegisterFrame Component={Login}>
+            </LoginRegisterFrame>
           </>
           
           } />
 
-          <Route path = "/register" element={
-            <>
-              <Register></Register>
-            </>
-          } />
+        <Route path = "/register" element={
+          <>
+            <LoginRegisterFrame Component={Register}>
+            </LoginRegisterFrame>
+          </>
+        } />
+
 
       </Routes>
     </Router>
