@@ -1,6 +1,6 @@
 import style from './NavBar.module.css'
 import { Separator } from '../Footer/Footer'
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import React from 'react';
 
 function smallText(text){
@@ -54,6 +54,24 @@ function NavBar(){
     const [showQR, setShowQR] = useState(false);
     const [showLanguage, setShowLanguage] = useState(false);
     const [showNotification, setShowNotification] = useState(false);
+    const input = useRef(null);
+        
+    async function getProductsByName(){
+        const response = await fetch(`http://localhost:8080/shop/products/${input}`,{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsIn"
+            },
+            body: JSON.stringify({
+
+            })
+        });
+
+        const data = response.json();
+
+        return data;
+    }
 
     return (
         <>
@@ -113,13 +131,12 @@ function NavBar(){
                     <img src="./images/logo.png" className="w-1/6 h-16 mr-5">
                     </img>
 
-                    <div className="rounded-md bg-white pt-1 pr-1 pb-1 h-10 w-4/6 place-content-between mt-5">
-                        <div className="pl-5">
-                            <input type="text" className="w-11/12" placeholder="Shopee bao ship 0Đ - Đăng ký ngay!"></input>
+                    <div className="rounded-md bg-white h-10 w-4/6 place-content-between mt-5">
+                        <div className="transition-colors duration-300 border-2 pl-5 focus-within:border-black rounded">
+                            <input ref={input} type="text" className="outline-none w-11/12 h-full flex-grow" placeholder="Shopee bao ship 0Đ - Đăng ký ngay!"></input>
                             <button className="text-white hover:opacity-70 w-1/12 rounded-md bg-orange-600 pl-5 pr-5 pt-1 pb-1">
-                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <i className="fa-solid fa-magnifying-glass"></i>
                             </button>
-
                         </div>
 
                         <div className={`space-x-3 flex mt-2 ${style.text_under_search_bar} text-white`}>

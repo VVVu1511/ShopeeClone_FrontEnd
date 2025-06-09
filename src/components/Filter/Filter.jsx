@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 function Filter(){
+
     const drawStars = (number_of_yellow, number_of_white) => {
         return [Array.from({length:number_of_yellow}).map((_,i) => (
                                 <i class="fa-solid fa-star text-yellow-400"></i>
@@ -22,25 +23,6 @@ function Filter(){
         </>;
     }
 
-    const response = fetch("",{
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-            'Bearer-Token': ''
-        },
-        body: {
-            productType: productType,
-            sellLocation: sellLocation,
-            transportType: transportType,
-            brand: brand,
-            price: price,
-            shopType: shopType,
-            status: status,
-            sale: sale
-        }
-    });
-
-    const data = response.json();
 
     const [productType,setProductType] = useState("");
     const [sellLocation,setSellLocation] = useState("");
@@ -50,6 +32,30 @@ function Filter(){
     const [shopType,setShopType] = useState("");
     const [status,setStatus] = useState("");
     const [sale,setSale] = useState("");
+
+    const filteredProduct = async() => {
+        const response = await fetch("",{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Bearer-Token': ''
+            },
+            body: JSON.stringify({
+                productType: productType,
+                sellLocation: sellLocation,
+                transportType: transportType,
+                brand: brand,
+                price: price,
+                shopType: shopType,
+                status: status,
+                sale: sale
+            })
+        });
+
+        const data = await response.json();
+
+        return data;
+    }
 
     return(
         <>
