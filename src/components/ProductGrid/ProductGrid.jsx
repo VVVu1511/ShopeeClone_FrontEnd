@@ -7,29 +7,12 @@ function FilterBlock(){
     return "flex justify-center items-center h-12 bg-white pl-3 pr-3 cursor-pointer";
 }
 
-function ProductGrid(){
-    async function getAdminToken(){
-        const response = await fetch('http://localhost:8080/shop/auth/token', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify( {
-                "username": "admin",
-                "password": "admin"
-            })
-        });
-        
-        const data = await response.json();
-
-        return data.result.token;
-    }
-
-    async function getProducts(admin_token) {
+function ProductGrid({products,setProducts,token}){
+    async function getProducts(token) {
         const products = await fetch("http://localhost:8080/shop/product",{
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${admin_token}`,
+                "Authorization": `Bearer ${token}`,
             }
         });
     
@@ -38,12 +21,9 @@ function ProductGrid(){
         return data;
     }
 
-    const [products, setProducts] = useState(null);
-
     useEffect(() => {
         async function fetchData() {
-            const admin_token = await getAdminToken();
-            const productsData = await getProducts(admin_token);
+            const productsData = await getProducts(token);
             setProducts(productsData.result); 
         }
 

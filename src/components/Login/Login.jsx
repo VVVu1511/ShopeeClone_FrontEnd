@@ -2,17 +2,14 @@ import React, { useRef, useState } from 'react';
 import style from './Login.module.css'
 import { useNavigate } from 'react-router-dom';
 
-function Login(){
+function Login({setToken}){
     const [isButtonActive,setIsButtonActive] = useState(false);
     const [isAccountValid, setIsAccountValid] = useState(true);
-    const [password,setPassword] = useState('');
-    const userName = useRef(null);
+    const password = useRef("");
+    const userName = useRef("");
     const [eyeOpen, setEyeOpen] = useState(false);
     const navigate = useNavigate();
 
-    const handlePasswordInput = (e) => {
-        setPassword(e.target.value);
-    }
 
     function handleLoginInput(){    
         if(userName.current.value === "" || password === ""){
@@ -23,22 +20,29 @@ function Login(){
         setIsButtonActive(true);
     }
 
-    async function handleLoginButton(){
+    async function authenticate(){
         const response = await fetch("http://localhost:8080/shop/auth/token",{
             method: 'POST',
             headers: {
                 "Content-Type": 'application/json'
             },
-            "body": JSON.stringify({
+            body: JSON.stringify({
                 username: userName.current.value,
-                password: password
+                password: password.current.value
             })
         });
 
         const data = await response.json();
 
-        if(data.code === 0){
+        return data;
+    }
+
+    async function handleLoginButton(){
+        const data = await authenticate();
+
+        if(data.code == 0){
             setIsAccountValid(true);
+            setToken(data.result.token);
             navigate("/home");
         }
 
@@ -87,9 +91,8 @@ function Login(){
                         placeholder="Email/Số điện thoại/Tên đăng nhập"></input>
                                         
                     <div className='relative'>
-                        <input type='password' onChange={(e) => {
+                        <input type='password' ref={password} onChange={(e) => {
                             handleLoginInput(); 
-                            handlePasswordInput(e);
                         }} id="password" className='w-full p-3 border-2 border-gray-200 rounded-sm' placeholder="Mật khẩu"></input>
                         <i
                             onClick={handleEyeClick}
@@ -102,7 +105,8 @@ function Login(){
                     <button onClick={handleLoginButton} 
                         className={`${isButtonActive 
                         ? "bg-orange-500 cursor-pointer hover:opacity-80" : "bg-orange-300 cursor-not-allowed"} 
-                        pb-2 pt-2 w-full flex justify-center text-white`}>Đăng nhập</button>
+                        pb-2 pt-2 w-full flex justify-center text-white`
+                    }>Đăng nhập</button>
 
                     <div className='flex place-content-between'>
                         <p className='text-blue-400 text-sm'>Quên mật khẩu</p>

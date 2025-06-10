@@ -50,7 +50,7 @@ function Language(showLanguage){
 }
 
 
-function NavBar(){
+function NavBar(token){
     const [showQR, setShowQR] = useState(false);
     const [showLanguage, setShowLanguage] = useState(false);
     const [showNotification, setShowNotification] = useState(false);

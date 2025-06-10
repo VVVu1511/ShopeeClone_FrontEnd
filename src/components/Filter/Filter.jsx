@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Filter(){
+function Filter({setProducts,token}){
 
     const drawStars = (number_of_yellow, number_of_white) => {
         return [Array.from({length:number_of_yellow}).map((_,i) => (
@@ -17,12 +17,15 @@ function Filter(){
     const checkBox = (text, callback) => {
         return <>
             <li className="flex space-x-2 cursor-pointer">
-                <input onClick={() => callback(text)} className="cursor-pointer" type="checkbox"></input>
+                <input onChange={(e) => {
+                    callback(e.target.checked ? text : "");
+
+                    filteredProduct();
+                }} className="cursor-pointer" type="checkbox"></input>
                 <p>{text}</p>
             </li>
         </>;
     }
-
 
     const [productType,setProductType] = useState("");
     const [sellLocation,setSellLocation] = useState("");
@@ -34,27 +37,27 @@ function Filter(){
     const [sale,setSale] = useState("");
 
     const filteredProduct = async() => {
-        const response = await fetch("",{
+        const response = await fetch("http://localhost:8080/shop/product",{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Bearer-Token': ''
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 productType: productType,
-                sellLocation: sellLocation,
-                transportType: transportType,
-                brand: brand,
-                price: price,
-                shopType: shopType,
-                status: status,
-                sale: sale
+                // sellLocation: sellLocation,
+                // transportType: transportType,
+                // brand: brand,
+                // price: price,
+                // shopType: shopType,
+                // status: status,
+                // sale: sale
             })
         });
 
         const data = await response.json();
 
-        return data;
+        setProducts(data);
     }
 
     return(
@@ -67,7 +70,7 @@ function Filter(){
 
                 <ul>
                     <p>Theo Danh Mục</p>
-                    {checkBox("Máy điều hòa (8k+)",setProductType)}
+                    {checkBox("Super Cheap T-Shirt",setProductType)}
                     {checkBox("Quạt (4k+)",setProductType)}
                 </ul>
 

@@ -2,7 +2,7 @@ import React from "react";
 import Footer from "../Footer/Footer";
 
 
-function LoginRegisterFrame({ Component }){
+function LoginRegisterFrame({ Component ,setToken}){
     return (
         <>
             <div className='bg-white pl-16 pr-16 pt-8 pb-8 place-content-between flex'>
@@ -15,7 +15,7 @@ function LoginRegisterFrame({ Component }){
             </div>
 
             <div className='flex justify-end pr-32 bg-orange-500 pt-16 pb-16'>
-                <Component />
+                <Component setToken={setToken}/>
             </div>
 
             <Footer></Footer>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useRef , useState} from 'react';
 import { useInRouterContext, useNavigate } from 'react-router-dom';
 
-function Register(){
+function Register(setToken){
     const [phoneNumber,setPhoneNumber] = useState("");
     const navigate = useNavigate();
 

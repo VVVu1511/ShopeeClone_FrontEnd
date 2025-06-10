@@ -4,22 +4,25 @@ import NavBar from "../components/NavBar/NavBar";
 import Filter from "../components/Filter/Filter";
 import ProductGrid from "../components/ProductGrid/ProductGrid";
 import Footer from "../components/Footer/Footer";
-import React from 'react';
+import React, { useState } from 'react';
 import Login from "../components/Login/Login"
 import Register from "../components/Register/Register";
 import LoginRegisterFrame from "../components/LoginRegisterFrame/LoginRegisterFrame";
 
 const AppRoutes = () => {
+  const [products,setProducts] = useState([]);
+  const [token,setToken] = useState("");
+
   return (
     <Router>
       <Routes>
         <Route path="/home" element={
           <>
-            <NavBar />
+            <NavBar token={token} />
             
             <div className="flex justify-center mb-5">
-              <Filter />
-              <ProductGrid />
+              <Filter setProducts={setProducts} token={token} />
+              <ProductGrid products={products} setProducts={setProducts} token={token}/>
             </div>
 
             <Footer />
@@ -29,7 +32,7 @@ const AppRoutes = () => {
 
         <Route path = "/login" element={
           <>
-            <LoginRegisterFrame Component={Login}>
+            <LoginRegisterFrame Component={Login} setToken={setToken}>
             </LoginRegisterFrame>
           </>
           
