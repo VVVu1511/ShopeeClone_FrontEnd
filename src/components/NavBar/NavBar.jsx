@@ -1,6 +1,6 @@
 import style from './NavBar.module.css'
 import { Separator } from '../Footer/Footer'
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import React from 'react';
 
 function smallText(text){
@@ -50,7 +50,7 @@ function Language(showLanguage){
 }
 
 
-function NavBar(token){
+function NavBar({token,setProducts}){
     const [showQR, setShowQR] = useState(false);
     const [showLanguage, setShowLanguage] = useState(false);
     const [showNotification, setShowNotification] = useState(false);
@@ -61,20 +61,22 @@ function NavBar(token){
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsIn"
+                "Authorization": `Bearer ${token}`
             },
-            body: JSON.stringify({
-
-            })
         });
 
         const data = response.json();
 
-        return data;
+        setProducts(data.result.map(d => d.name));
     }
+
+    useEffect(() => {
+
+    },[input])
 
     return (
         <>
+
         <div className="relative flex justify-center bg-orange-500">
             <div className= {`${showNotification ? 'block' : 'hidden'} ${style.sharp_point} absolute border-x-8 border-t-8 border-x-transparent border-t-white transform -translate-x-1/2 top-5 rotate-180`}></div>
 
@@ -137,6 +139,10 @@ function NavBar(token){
                             <button className="text-white hover:opacity-70 w-1/12 rounded-md bg-orange-600 pl-5 pr-5 pt-1 pb-1">
                                 <i className="fa-solid fa-magnifying-glass"></i>
                             </button>
+                        </div>
+
+                        <div>
+                            
                         </div>
 
                         <div className={`space-x-3 flex mt-2 ${style.text_under_search_bar} text-white`}>

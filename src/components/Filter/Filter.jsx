@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Filter({setProducts,token}){
 
@@ -19,8 +19,6 @@ function Filter({setProducts,token}){
             <li className="flex space-x-2 cursor-pointer">
                 <input onChange={(e) => {
                     callback(e.target.checked ? text : "");
-
-                    filteredProduct();
                 }} className="cursor-pointer" type="checkbox"></input>
                 <p>{text}</p>
             </li>
@@ -35,6 +33,10 @@ function Filter({setProducts,token}){
     const [shopType,setShopType] = useState("");
     const [status,setStatus] = useState("");
     const [sale,setSale] = useState("");
+
+    useEffect(() => {
+        filteredProduct();
+    },[productType,sellLocation,transportType,brand,price,shopType,status,sale]);
 
     const filteredProduct = async() => {
         const response = await fetch("http://localhost:8080/shop/product",{
@@ -56,8 +58,12 @@ function Filter({setProducts,token}){
         });
 
         const data = await response.json();
+        
+        console.log(productType);
 
-        setProducts(data);
+        console.log(data);
+
+        setProducts(data.result);
     }
 
     return(

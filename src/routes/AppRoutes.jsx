@@ -18,7 +18,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/home" element={
           <>
-            <NavBar token={token} />
+            <NavBar token={token} setProducts={setProducts}/>
             
             <div className="flex justify-center mb-5">
               <Filter setProducts={setProducts} token={token} />
