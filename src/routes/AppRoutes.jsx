@@ -45,6 +45,22 @@ const AppRoutes = () => {
           </>
         } />
 
+        <Route  path="/product_page/:product_name" 
+                element={
+          <>
+            <NavBar token={token} setProducts={setProducts}/>
+              
+              <div className="flex justify-center mb-5">
+                <Filter setProducts={setProducts} token={token} />
+                <ProductGrid products={products} setProducts={setProducts} token={token}/>
+              </div>
+
+              <Footer />
+          </>
+        
+        }/>
+
+
 
       </Routes>
     </Router>

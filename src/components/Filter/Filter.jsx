@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 function Filter({setProducts,token}){
+    const product_name = useParams();
+
+    //find filters with that name or related
 
     const drawStars = (number_of_yellow, number_of_white) => {
         return [Array.from({length:number_of_yellow}).map((_,i) => (

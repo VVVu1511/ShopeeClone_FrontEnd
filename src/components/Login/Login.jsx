@@ -10,9 +10,8 @@ function Login({setToken}){
     const [eyeOpen, setEyeOpen] = useState(false);
     const navigate = useNavigate();
 
-
     function handleLoginInput(){    
-        if(userName.current.value === "" || password === ""){
+        if(userName.current.value === "" || password.current.value === ""){
             setIsButtonActive(false);
             return;
         }
@@ -96,7 +95,7 @@ function Login({setToken}){
                         }} id="password" className='w-full p-3 border-2 border-gray-200 rounded-sm' placeholder="Mật khẩu"></input>
                         <i
                             onClick={handleEyeClick}
-                            className={`right-3.5 top-3.5 absolute ${
+                            className={`right-3.5 top-3.5 absolute cursor-pointer ${
                             eyeOpen ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}`}
                         />
 

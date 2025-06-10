@@ -2,12 +2,17 @@ import { useState } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import React from 'react';
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 function FilterBlock(){
     return "flex justify-center items-center h-12 bg-white pl-3 pr-3 cursor-pointer";
 }
 
 function ProductGrid({products,setProducts,token}){
+    const {product_name} = useParams();
+
+    //find products with that name or related
+
     async function getProducts(token) {
         const products = await fetch("http://localhost:8080/shop/product",{
             method: "GET",

@@ -2,6 +2,7 @@ import style from './NavBar.module.css'
 import { Separator } from '../Footer/Footer'
 import { useEffect, useRef, useState } from 'react';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function smallText(text){
     return <p className="mr-1 hover:opacity-80 cursor-pointer">
@@ -51,28 +52,40 @@ function Language(showLanguage){
 
 
 function NavBar({token,setProducts}){
+    const example = ["A", "AA", "BB", "AAC"];
+    
     const [showQR, setShowQR] = useState(false);
     const [showLanguage, setShowLanguage] = useState(false);
     const [showNotification, setShowNotification] = useState(false);
-    const input = useRef(null);
+    const [isSearching, setIsSearching] = useState(false);    
+    const [searchItems, setSearchItems] = useState([]);
+    const navigate = useNavigate();
+
+    // async function getProductsByName(){
+    //     const response = await fetch(`http://localhost:8080/shop/products/${input}`,{
+    //         method: "GET",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "Authorization": `Bearer ${token}`
+    //         },
+    //     });
+
+    //     const data = response.json();
+
+    //     setProducts(data.result.map(d => d.name));
+    // }
+
+    const handleInputChange = (e) => {
+        const value = e.target.value;
         
-    async function getProductsByName(){
-        const response = await fetch(`http://localhost:8080/shop/products/${input}`,{
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-        });
+        if(value == "") setSearchItems([]);
 
-        const data = response.json();
-
-        setProducts(data.result.map(d => d.name));
+        else setSearchItems(example.filter(item => item.startsWith(value)));
     }
 
-    useEffect(() => {
-
-    },[input])
+    const handleSearchItemClick = (e) => {
+        navigate(`/product_page/${e.textContent}`);
+    }
 
     return (
         <>
@@ -135,15 +148,19 @@ function NavBar({token,setProducts}){
 
                     <div className="rounded-md bg-white h-10 w-4/6 place-content-between mt-5">
                         <div className="transition-colors duration-300 border-2 pl-5 focus-within:border-black rounded">
-                            <input ref={input} type="text" className="outline-none w-11/12 h-full flex-grow" placeholder="Shopee bao ship 0Đ - Đăng ký ngay!"></input>
+                            <input onChange={handleInputChange} onBlur={() => setIsSearching(false)} onFocus={() => setIsSearching(true)} type="text" className="outline-none w-11/12 h-full flex-grow" placeholder="Shopee bao ship 0Đ - Đăng ký ngay!"></input>
                             <button className="text-white hover:opacity-70 w-1/12 rounded-md bg-orange-600 pl-5 pr-5 pt-1 pb-1">
                                 <i className="fa-solid fa-magnifying-glass"></i>
                             </button>
                         </div>
 
-                        <div>
-                            
-                        </div>
+                        <ul className={`bg-white cursor-pointer ${isSearching ? 'block': 'hidden'}`}>
+                            {
+                                searchItems?.map((ele) => {
+                                    return <li onClick={handleSearchItemClick} className='hover:bg-gray-100 pl-2 pt-2 pb-2'>{ele}</li>
+                                })
+                            }
+                        </ul>
 
                         <div className={`space-x-3 flex mt-2 ${style.text_under_search_bar} text-white`}>
                             {smallText("Máy Quạt Cầm Tay")}
