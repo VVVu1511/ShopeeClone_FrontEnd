@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import Login from "../components/Login/Login"
 import Register from "../components/Register/Register";
 import LoginRegisterFrame from "../components/LoginRegisterFrame/LoginRegisterFrame";
+import ProductInformation from "../components/ProductInformation/ProductInformation";
 
 const AppRoutes = () => {
   const [products,setProducts] = useState([]);
@@ -60,6 +61,18 @@ const AppRoutes = () => {
         
         }/>
 
+        <Route path = "/product_page/:product_id" element={
+            <>
+              <NavBar token={token} setProducts={setProducts}/>
+              
+              <div className="flex justify-center mb-5">
+                <ProductInformation token={token}/>
+              </div>
+
+              <Footer />
+            </>
+        }
+        />
 
 
       </Routes>
