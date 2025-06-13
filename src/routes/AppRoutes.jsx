@@ -74,6 +74,19 @@ const AppRoutes = () => {
         }
         />
 
+        <Route path ="/test" element={
+            <>
+              <NavBar token={token} setProducts={setProducts}/>
+              
+              
+              <ProductInformation token={token}/>
+              
+
+              <Footer />
+            </>
+        }
+        />
+
 
       </Routes>
     </Router>
