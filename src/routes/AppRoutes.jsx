@@ -9,10 +9,12 @@ import Login from "../components/Login/Login"
 import Register from "../components/Register/Register";
 import LoginRegisterFrame from "../components/LoginRegisterFrame/LoginRegisterFrame";
 import ProductInformation from "../components/ProductInformation/ProductInformation";
+import Cart from "../components/Cart/Cart";
 
 const AppRoutes = () => {
   const [products,setProducts] = useState([]);
   const [token,setToken] = useState("");
+  const [cartProducts,setCartProducts] = useState([]);
 
   return (
     <Router>
@@ -66,7 +68,7 @@ const AppRoutes = () => {
               <NavBar token={token} setProducts={setProducts}/>
               
               <div className="flex justify-center mb-5">
-                <ProductInformation token={token}/>
+                <ProductInformation cartProducts={cartProducts} setCartProducts={setCartProducts} token={token}/>
               </div>
 
               <Footer />
@@ -79,7 +81,7 @@ const AppRoutes = () => {
               <NavBar token={token} setProducts={setProducts}/>
               
               
-              <ProductInformation token={token}/>
+              <Cart cartProducts={cartProducts} token={token}/>
               
 
               <Footer />

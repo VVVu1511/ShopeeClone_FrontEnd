@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { drawStars } from '../Filter/Filter';
 import { Separator } from '../Footer/Footer';
+import { useNavigate } from 'react-router-dom';
 
-function ProductInformation(){
+function ProductInformation({token,cartProducts,setCartProducts}){
+    const navigate = useNavigate();
+    const [quantity,setQuantity] = useState(1);
+
+    const changeQuantity = async(amount) => {
+        if(quantity + amount < 0) return;
+
+        setQuantity(quantity + amount);
+    }
+
+    const handleAddingIntoCart = async() => {
+        if(!token){
+            navigate("/login");
+        }
+        
+        setCartProducts(cartProducts.append())//newproduct));
+        alert("success");
+    }   
+
+
     return (
         <div className='w-full space-y-2 bg-gray-100 p-5'>
             <div className='justify-center flex w-full p-2 space-x-3 bg-white'>
@@ -59,14 +79,14 @@ function ProductInformation(){
                         <p>Số Lượng</p>
                         
                         <div className='flex'>
-                            <div className='p-1 border-2 border-gray-200'>-</div>
-                            <div className='p-1 border-2 border-gray-200'>1</div>
-                            <div className='p-1 border-2 border-gray-200'>+</div>
+                            <div onClick={() => changeQuantity(-1)} className='cursor-pointer p-1 border-2 border-gray-200'>-</div>
+                            <div className='p-1 border-2 border-gray-200'>{quantity}</div>
+                            <div onClick={() => changeQuantity(1)} className='cursor-pointer p-1 border-2 border-gray-200'>+</div>
                         </div>
                     </div>
 
                     <div className='flex space-x-2'>
-                        <div className=' hover:brightness-105 cursor-pointer space-x-2 text-orange-500 flex bg-red-100 pt-2 pb-2 pl-3 pr-3'>
+                        <div onClick={() => handleAddingIntoCart} className=' hover:brightness-105 cursor-pointer space-x-2 text-orange-500 flex bg-red-100 pt-2 pb-2 pl-3 pr-3'>
                             <i class="mt-1.5 fa-solid fa-cart-plus"></i>
                             <p>Thêm Vào Giỏ Hàng</p>
                         </div>

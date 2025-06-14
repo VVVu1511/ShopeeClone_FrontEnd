@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function smallText(text){
-    return <p className="mr-1 hover:opacity-80 cursor-pointer">
+function SmallText({text, onClick=null}){
+    return <p onClick={onClick} className="mr-1 hover:opacity-80 cursor-pointer">
         {text}
     </p>;
 }
@@ -104,16 +104,16 @@ function NavBar({token,setProducts}){
             <div className="w-[55%]">
                 <div className="flex justify-between text-white">
                     <div className="flex pt-1 pl-7 text-xs space-x-1.5">
-                        {smallText("Kênh người bán")}
+                        <SmallText text="Kênh người bán" />
                         <Separator />
-                        {smallText("Trở thành Người bán Shopee")}
+                        <SmallText text="Trở thành Người bán Shopee" />
                         <Separator />
                         <div onMouseEnter={() => setShowQR(true)}
                             onMouseLeave={() => setShowQR(false)}>
-                            {smallText("Tải ứng dụng")}
+                            <SmallText text="Tải ứng dụng" />
                         </div>
                         <Separator />   
-                        {smallText("Kết nối")}
+                        <SmallText text="Kết nối" />
                         <i className="cursor-pointer mt-1 fa-brands fa-facebook"></i>
                         <i className="cursor-pointer mt-1 fa-brands fa-instagram"></i>
                     </div>
@@ -132,13 +132,12 @@ function NavBar({token,setProducts}){
                         
                         <div onMouseEnter={() => setShowLanguage(true)}
                             onMouseLeave = {() => setShowLanguage(false)}>
-                            {smallText("Tiếng Việt")}
+                            <SmallText text="Tiếng Việt" />
                         </div>
 
-                        {smallText("Đăng ký")}
+                        <SmallText text="Đăng ký" onClick={() => navigate("/register")} />
                         <Separator />
-
-                        {smallText("Đăng nhập")}
+                        <SmallText text="Đăng nhập" onClick={() => navigate("/login")} />
                     </div>
                 </div>
 
@@ -163,14 +162,14 @@ function NavBar({token,setProducts}){
                         </ul>
 
                         <div className={`space-x-3 flex mt-2 ${style.text_under_search_bar} text-white`}>
-                            {smallText("Máy Quạt Cầm Tay")}
-                            {smallText("Áo Phông Đẹp")}
-                            {smallText("Sale 1k Điện Thoại iPhone")}
-                            {smallText("Son Bóng Chính Hãng")}
-                            {smallText("Dép")}
-                            {smallText("Áo Kiểu Babydoll")}
-                            {smallText("Vòng 4 Lá Bạc")}
-                            {smallText("Chắn Bùn Cnc")}
+                            <SmallText text="Máy Quạt Cầm Tay" />
+                            <SmallText text="Áo Phông Đẹp" />
+                            <SmallText text="Sale 1k Điện Thoại iPhone" />
+                            <SmallText text="Son Bóng Chính Hãng" />
+                            <SmallText text="Dép" />
+                            <SmallText text="Áo Kiểu Babydoll" />
+                            <SmallText text="Vòng 4 Lá Bạc" />
+                            <SmallText text="Chắn Bùn Cnc" />
                         </div>
                     </div>
 
