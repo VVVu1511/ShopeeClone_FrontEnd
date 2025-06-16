@@ -43,12 +43,12 @@ const AppRoutes = () => {
 
         <Route path = "/register" element={
           <>
-            <LoginRegisterFrame Component={Register}>
+            <LoginRegisterFrame Component={Register} setToken={setToken}>
             </LoginRegisterFrame>
           </>
         } />
 
-        <Route  path="/product_page/:product_name" 
+        {/* <Route  path="/product_page/:product_name" 
                 element={
           <>
             <NavBar token={token} setProducts={setProducts}/>
@@ -61,7 +61,7 @@ const AppRoutes = () => {
               <Footer />
           </>
         
-        }/>
+        }/> */}
 
         <Route path = "/product_page/:product_id" element={
             <>

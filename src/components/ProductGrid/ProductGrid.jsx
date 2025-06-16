@@ -2,7 +2,7 @@ import { useState } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import React from 'react';
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function FilterBlock(){
     return "flex justify-center items-center h-12 bg-white pl-3 pr-3 cursor-pointer";
@@ -10,14 +10,19 @@ function FilterBlock(){
 
 function ProductGrid({products,setProducts,token}){
     const {product_name} = useParams();
+    const navigate = useNavigate();
 
     //find products with that name or related
+
+    const productCardChoosing = async(e) => {
+        navigate(`/product_page/${e.productId}`)
+    };
 
     async function getProducts(token) {
         const products = await fetch("http://localhost:8080/shop/product",{
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${token}`,
+                // "Authorization": `Bearer ${token}`,
             }
         });
     
@@ -89,7 +94,7 @@ function ProductGrid({products,setProducts,token}){
                         <div className="grid grid-cols-5 mt-1 justify-center flex">
                             {
                                 products.map((product,index)=>{
-                                    return <ProductCard key={index} product={product}></ProductCard>
+                                    return <ProductCard callback={productCardChoosing(product)} key={index} product={product}></ProductCard>
                                 })
                             }
                         </div>

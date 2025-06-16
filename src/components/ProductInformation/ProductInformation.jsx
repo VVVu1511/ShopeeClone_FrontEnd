@@ -18,6 +18,9 @@ function ProductInformation({token,cartProducts,setCartProducts}){
             navigate("/login");
         }
         
+        const response = await fetch();
+        
+
         setCartProducts(cartProducts.append())//newproduct));
         alert("success");
     }   
