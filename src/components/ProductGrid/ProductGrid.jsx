@@ -19,16 +19,21 @@ function ProductGrid({products,setProducts,token}){
     };
 
     async function getProducts(token) {
+        console.log(product_name)
         const products = await fetch("http://localhost:8080/shop/product",{
-            method: "GET",
+            method: "POST",
             headers: {
                 // "Authorization": `Bearer ${token}`,
-            }
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "productType": product_name
+            })
         });
     
         const data = await products.json();
 
-        return data;
+        return data.result;
     }
 
     useEffect(() => {

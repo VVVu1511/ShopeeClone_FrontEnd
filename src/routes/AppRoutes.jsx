@@ -48,7 +48,7 @@ const AppRoutes = () => {
           </>
         } />
 
-        {/* <Route  path="/product_page/:product_name" 
+        <Route  path="/product_page/product_name/:product_name" 
                 element={
           <>
             <NavBar token={token} setProducts={setProducts}/>
@@ -61,7 +61,7 @@ const AppRoutes = () => {
               <Footer />
           </>
         
-        }/> */}
+        }/>
 
         <Route path = "/product_page/:product_id" element={
             <>
@@ -76,12 +76,12 @@ const AppRoutes = () => {
         }
         />
 
-        <Route path ="/test" element={
+        <Route path ="/cart" element={
             <>
               <NavBar token={token} setProducts={setProducts}/>
               
               
-              <Cart cartProducts={cartProducts} token={token}/>
+              {/* <Cart cartProducts={cartProducts} token={token}/> */}
               
 
               <Footer />

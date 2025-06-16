@@ -59,6 +59,7 @@ function Cart({token, cartProducts}){
                 </div>
 
                 <ul>
+
                     {cartProducts.map((ele) => {
                         <CartProduct />
                     })}
@@ -68,4 +69,4 @@ function Cart({token, cartProducts}){
     );
 }
 
-export default Cart; */
+export default Cart;  */

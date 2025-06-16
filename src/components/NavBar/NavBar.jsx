@@ -59,7 +59,12 @@ function NavBar({token,setProducts}){
     const [showNotification, setShowNotification] = useState(false);
     const [isSearching, setIsSearching] = useState(false);    
     const [searchItems, setSearchItems] = useState([]);
+    const input = useRef(null);
     const navigate = useNavigate();
+
+    const seeCart = async() => {
+        navigate("/cart");
+    }
 
     // async function getProductsByName(){
     //     const response = await fetch(`http://localhost:8080/shop/products/${input}`,{
@@ -85,6 +90,10 @@ function NavBar({token,setProducts}){
 
     const handleSearchItemClick = (e) => {
         navigate(`/product_page/${e.textContent}`);
+    }
+
+    const searching = async() => {
+        navigate(`/product_page/product_name/${input.current.value}`);
     }
 
     return (
@@ -147,7 +156,7 @@ function NavBar({token,setProducts}){
 
                     <div className="rounded-md bg-white h-10 w-4/6 place-content-between mt-5">
                         <div className="transition-colors duration-300 border-2 pl-5 focus-within:border-black rounded">
-                            <input onChange={handleInputChange} onBlur={() => setIsSearching(false)} onFocus={() => setIsSearching(true)} type="text" className="outline-none w-11/12 h-full flex-grow" placeholder="Shopee bao ship 0Đ - Đăng ký ngay!"></input>
+                            <input ref={input} onClick={() => searching()} onChange={handleInputChange} onBlur={() => setIsSearching(false)} onFocus={() => setIsSearching(true)} type="text" className="outline-none w-11/12 h-full flex-grow" placeholder="Shopee bao ship 0Đ - Đăng ký ngay!"></input>
                             <button className="text-white hover:opacity-70 w-1/12 rounded-md bg-orange-600 pl-5 pr-5 pt-1 pb-1">
                                 <i className="fa-solid fa-magnifying-glass"></i>
                             </button>
@@ -174,7 +183,7 @@ function NavBar({token,setProducts}){
                     </div>
 
                     <div className="w-1/6 pl-16">
-                        <i className="mt-7 text-white text-2xl fa-solid fa-cart-shopping"></i>
+                        <i onClick={() => seeCart()} className="mt-7 text-white text-2xl fa-solid fa-cart-shopping cursor-pointer"></i>
                     </div>
                 </div>
 

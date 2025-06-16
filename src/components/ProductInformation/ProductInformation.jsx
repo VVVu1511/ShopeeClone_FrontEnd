@@ -13,16 +13,38 @@ function ProductInformation({token,cartProducts,setCartProducts}){
         setQuantity(quantity + amount);
     }
 
+    const seeCart = async() => {
+        navigate('/cart');
+    }
+
     const handleAddingIntoCart = async() => {
-        if(!token){
-            navigate("/login");
+        // if(!token){
+        //     navigate("/login");
+        // }
+        
+        const response = await fetch("http://localhost:8080/shop/users/buy/product",{    
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                // "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                "cartId": 1,
+                "productId": 2,
+                "quantity": quantity
+            })
+        });
+        
+        const data = await response.json();
+
+        if(data.code == 0){
+            alert("success");
+        }
+        else{
+            alert("cannot buy !");
         }
         
-        const response = await fetch();
-        
-
-        setCartProducts(cartProducts.append())//newproduct));
-        alert("success");
+        setCartProducts(cartProducts.append());
     }   
 
 
@@ -89,8 +111,8 @@ function ProductInformation({token,cartProducts,setCartProducts}){
                     </div>
 
                     <div className='flex space-x-2'>
-                        <div onClick={() => handleAddingIntoCart} className=' hover:brightness-105 cursor-pointer space-x-2 text-orange-500 flex bg-red-100 pt-2 pb-2 pl-3 pr-3'>
-                            <i class="mt-1.5 fa-solid fa-cart-plus"></i>
+                        <div onClick={() => handleAddingIntoCart()} className=' hover:brightness-105 cursor-pointer space-x-2 text-orange-500 flex bg-red-100 pt-2 pb-2 pl-3 pr-3'>
+                            <i className="mt-1.5 fa-solid fa-cart-plus"></i>
                             <p>Thêm Vào Giỏ Hàng</p>
                         </div>
                         <div className='hover:brightness-105 bg-orange-600 cursor-pointer text-white pt-2 pb-2 pl-12 pr-12'>
